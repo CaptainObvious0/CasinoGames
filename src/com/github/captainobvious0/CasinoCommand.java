@@ -8,6 +8,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import com.github.captainobvious0.cardutil.Deck;
 import com.github.captainobvious0.cardutil.GamePlayer;
 
 public class CasinoCommand implements CommandExecutor {
@@ -55,9 +56,10 @@ public class CasinoCommand implements CommandExecutor {
 			}
 			
 			if (args[1].equalsIgnoreCase("blackjack")) {
-				new GamePlayer(player, "BlackJack");
+				Deck deck = new Deck();
+				new GamePlayer(player, "BlackJack", deck);
 			} else if (args[1].equalsIgnoreCase("poker")) {
-				new GamePlayer(player, "Poker");
+				new GamePlayer(player, "Poker", new Deck());
 			}
 			
 		}

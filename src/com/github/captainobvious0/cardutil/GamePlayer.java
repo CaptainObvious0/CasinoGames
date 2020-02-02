@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import com.github.captainobvious0.games.BlackJack;
@@ -18,13 +19,12 @@ public class GamePlayer {
     static Map<Player, String> playersInGame = new HashMap<Player, String>();
     static Map<Player, GamePlayer> playerList = new HashMap<Player, GamePlayer>();
     
-    public GamePlayer(Player player, String game) {
+    public GamePlayer(Player player, String game, Deck deck) {
     	
         this.player = player;
         this.game = game;
         playersInGame.put(player, game);
         
-        Deck deck = new Deck();
         this.deck = deck;
         this.pDeck = deck.currentDeck;
         
@@ -54,6 +54,14 @@ public class GamePlayer {
         pDeck.clear();
     }
     
+    public Player getPlayer() {
+    	return this.player;
+    }
+    
+    public Deck getDeck() {
+    	return this.deck;
+    }
+    
 	public static boolean removePlayer(Player player) {
 		
 		if (playersInGame.containsKey(player)) {
@@ -77,6 +85,10 @@ public class GamePlayer {
 	
 	public static GamePlayer getGamePlayer(Player player) {
 		return playerList.get(player);
+	}
+	
+	public void message(String msg) {
+		player.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
 	}
     
 }

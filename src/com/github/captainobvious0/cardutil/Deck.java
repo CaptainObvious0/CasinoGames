@@ -8,7 +8,7 @@ public class Deck {
     ArrayList<Integer> deck = new ArrayList<Integer>();
     ArrayList<Integer> currentDeck = new ArrayList<Integer>();
     
-    Deck() {
+    public Deck() {
         createDeck();
     }
     
@@ -28,7 +28,7 @@ public class Deck {
     // 2 = Diamonds
     // 3 = Clubs
     // 4 = Spades
-    public int getSuit(int card) {
+    public static int getSuit(int card) {
         double val = card / 13D;
         if (val <= 1D) {
             return 1;
@@ -45,11 +45,12 @@ public class Deck {
     // Card Values:
     // value + 1 (Since cards start at 1)
     // Ex. 1 is actually 2, 9 is 10, 0 is Ace
-    public int getValue(int card) {
+    public static int getValue(int card) {
         return card % 13;
     }
     
-    public int getGameValue(int card) {
+    // BlackJack
+    public static int getGameValue(int card) {
         int val = getValue(card);
         if (val >= 10 && val != 0) {
             return 10;
@@ -60,6 +61,7 @@ public class Deck {
         }
     }
     
+    // BlackJack
     public int getHandTotal(ArrayList<Integer> cards) {
         int total = 0;
         for (int card : cards) {
@@ -69,7 +71,7 @@ public class Deck {
     }
     
     // Converts a card to a readable String
-    public String cardToString(int card) {
+    public static String cardToString(int card) {
         int suit = getSuit(card);
         int value = getValue(card);
         String sSuit = "";
