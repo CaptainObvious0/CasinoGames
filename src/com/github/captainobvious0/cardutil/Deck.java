@@ -87,7 +87,7 @@ public class Deck {
             sSuit = "Spades";
         }
         
-        if (value <= 9 || value == 1) {
+        if (value <= 9 && value != 0) {
             sValue = (value + 1) + "";
         } else if (value == 10) {
             sValue = "Jack";

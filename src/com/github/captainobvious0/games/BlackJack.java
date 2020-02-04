@@ -52,13 +52,15 @@ public class BlackJack extends Game {
 		int total = Deck.getHandTotal(dealer.pDeck);
 		player.message("&9Casino> &7Dealers turn! Dealers second card: &6" + Deck.cardToString(dealer.pDeck.get(1)) + " &7for a total of " + total);
 		player.message(" ");
-		if (total < finalTotal) {
+		if (total <= finalTotal) {
 			dealerPick();
 		} else if (total <= 21) {
 			if (total == 21) {
 				player.message("&9Casino> &7Dealer &6BlackJack!");
-				player.playerLose();
+			} else {
+				player.message("&9Casino> &7Dealer won with a total of &6" + total);
 			}
+			player.playerLose();
 		}
 	}
 	
@@ -70,15 +72,7 @@ public class BlackJack extends Game {
 		player.message(" ");
 		
 		if (total <= finalTotal) {
-			Bukkit.getScheduler().runTaskLater(CasinoGames.getPlugin(), () -> 
-			new Runnable() {
-
-				@Override
-				public void run() {
-					dealerPick();
-				}
-				
-			}, 50);
+			Bukkit.getScheduler().runTaskLater(CasinoGames.getPlugin(), () -> dealerPick(), 50);
 		} else if (total <= 21) {
 			if (total == 21) {
 				player.message("&9Casino> &7Dealer &6BlackJack!");
