@@ -17,7 +17,7 @@ public class GamePlayer {
     Deck deck;
     ArrayList<Integer> pDeck;
     String game;
-    static Map<Player, String> playersInGame = new HashMap<Player, String>(); // TODO - remove this, just use playerList
+    public static Map<Player, String> playersInGame = new HashMap<Player, String>(); // TODO - remove this, just use playerList
     static Map<Player, GamePlayer> playerList = new HashMap<Player, GamePlayer>();
     static Map<GamePlayer, Game> playerGame = new HashMap<GamePlayer, Game>();
     
@@ -28,7 +28,7 @@ public class GamePlayer {
         playersInGame.put(player, game);
         
         this.deck = deck;
-        this.pDeck = deck.currentDeck;
+        this.pDeck = deck.createPlayerHand();
         
         // start game
         if (game.equalsIgnoreCase("blackjack")) {
@@ -46,6 +46,12 @@ public class GamePlayer {
     
     public void setPlayerDeck(ArrayList<Integer> deck) {
         this.pDeck = deck;
+    }
+    
+    public void removePlayer() {
+    	playersInGame.remove(player);
+    	playerList.remove(player);
+    	playerGame.remove(player);
     }
     
     public void addPlayerDeck(int card) {
@@ -99,11 +105,14 @@ public class GamePlayer {
 	}
 	
 	public void playerWin() {
-		
+		removePlayer();
+		message("&9Casino> &aYou won!");
+		// Rewards...
 	}
 	
 	public void playerLose() {
-		
+		removePlayer();
+		message("&9Casino> &cYou lost!");
 	}
     
 }

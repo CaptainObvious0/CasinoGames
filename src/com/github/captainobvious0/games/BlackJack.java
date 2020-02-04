@@ -20,13 +20,14 @@ public class BlackJack extends Game {
 		super("BlackJack", player);
 		this.player = player;
 		this.dealer = new Dealer(player, player.getDeck());
+		startGame();
 	}
 	
 	public void startGame() {
 		ArrayList<Integer> startHand = player.getPlayerDeck();
 		player.message("&9Casino> &7You have started a game of BlackJack!");
 		player.message(" ");
-		player.message("&9Casino> &7You have dealt the &6" + Deck.cardToString(startHand.get(0)) + " &7and the &6" + Deck.cardToString(startHand.get(1)) + " &7for a total of " + Deck.getHandTotal(player.getPlayerDeck()));
+		player.message("&9Casino> &7You have dealt the &6" + Deck.cardToString(startHand.get(0)) + " &7and the &6" + Deck.cardToString(startHand.get(1)) + " &7for a total of &6" + Deck.getHandTotal(player.getPlayerDeck()));
 		player.message("&9Casino> &7Dealers revealed card: " + Deck.cardToString(dealer.pDeck.get(0)));
 		player.message(" ");
 		shouldContinue();
@@ -35,7 +36,7 @@ public class BlackJack extends Game {
 	public void hit() {
 		int drawCard = player.getDeck().drawAnotherCard();
 		player.addPlayerDeck(drawCard);
-		player.message("&9Casinio> &7You drew the &6" + Deck.cardToString(drawCard) + " for a new total of &6" + Deck.getHandTotal(player.getPlayerDeck()));
+		player.message("&9Casinio> &7You drew the &6" + Deck.cardToString(drawCard) + " &7for a new total of &6" + Deck.getHandTotal(player.getPlayerDeck()));
 		player.message(" ");
 		shouldContinue();
 	}
@@ -54,7 +55,10 @@ public class BlackJack extends Game {
 		if (total < finalTotal) {
 			dealerPick();
 		} else if (total <= 21) {
-			
+			if (total == 21) {
+				player.message("&9Casino> &7Dealer &6BlackJack!");
+				player.playerLose();
+			}
 		}
 	}
 	
@@ -65,7 +69,7 @@ public class BlackJack extends Game {
 		player.message("&9Casino> &7Dealer picks... They drew the &6" + Deck.cardToString(drawCard) + " &7for a new total of &6" + total);
 		player.message(" ");
 		
-		if (total < finalTotal) {
+		if (total <= finalTotal) {
 			Bukkit.getScheduler().runTaskLater(CasinoGames.getPlugin(), () -> 
 			new Runnable() {
 

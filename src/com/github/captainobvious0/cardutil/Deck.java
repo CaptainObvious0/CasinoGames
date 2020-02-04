@@ -95,7 +95,7 @@ public class Deck {
             sValue = "Queen";
         } else if (value == 12) {
             sValue = "King";
-        } else {
+        } else if (value == 0) {
             sValue = "Ace";
         }
         

@@ -66,9 +66,11 @@ public class CasinoCommand implements CommandExecutor {
 		
 		else if (args[0].equalsIgnoreCase("stop")) {
 			
+		} else {
+			player.sendMessage(addColor("&9Casino> &7Unknown args"));
 		}
 		
-		return false;
+		return true;
 	}
 	
 	public String addColor(String msg) {

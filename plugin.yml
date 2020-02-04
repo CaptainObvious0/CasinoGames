@@ -1,0 +1,7 @@
+name: CasinoGames
+main: com.github.captainobvious0.CasinoGames
+version: 1.0
+commands:
+    casino:
+        description: CasinoGames main command
+        usage: /casino

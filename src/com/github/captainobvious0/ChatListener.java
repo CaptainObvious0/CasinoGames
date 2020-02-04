@@ -33,7 +33,7 @@ public class ChatListener implements Listener {
 				} else if (msg.equalsIgnoreCase("stand")) {
 					bJack.stand();
 				} else if (msg.equalsIgnoreCase("stop")) {
-					GamePlayer.removePlayer(player);
+					gPlayer.removePlayer();
 					player.sendMessage(addColor("&9Casino> &7You have left your game of &6BlackJack&7. Thanks for playing!"));
 				} else {
 					player.sendMessage(addColor("&9Casino> &7Please chat a valid game command or type &6stop &7to exit the game"));
@@ -43,6 +43,8 @@ public class ChatListener implements Listener {
 				
 			}
 			
+		} else {
+			player.sendMessage(GamePlayer.playersInGame + "");
 		}
 	}
 	
