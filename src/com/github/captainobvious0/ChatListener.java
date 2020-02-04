@@ -43,8 +43,6 @@ public class ChatListener implements Listener {
 				
 			}
 			
-		} else {
-			player.sendMessage(GamePlayer.playersInGame + "");
 		}
 	}
 	
