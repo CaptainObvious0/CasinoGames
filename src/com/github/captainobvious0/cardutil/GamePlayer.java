@@ -8,6 +8,7 @@ import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 
 import com.github.captainobvious0.games.BlackJack;
+import com.github.captainobvious0.games.Game;
 import com.github.captainobvious0.games.Poker;
 
 public class GamePlayer {
@@ -16,8 +17,9 @@ public class GamePlayer {
     Deck deck;
     ArrayList<Integer> pDeck;
     String game;
-    static Map<Player, String> playersInGame = new HashMap<Player, String>();
+    static Map<Player, String> playersInGame = new HashMap<Player, String>(); // TODO - remove this, just use playerList
     static Map<Player, GamePlayer> playerList = new HashMap<Player, GamePlayer>();
+    static Map<GamePlayer, Game> playerGame = new HashMap<GamePlayer, Game>();
     
     public GamePlayer(Player player, String game, Deck deck) {
     	
@@ -30,9 +32,9 @@ public class GamePlayer {
         
         // start game
         if (game.equalsIgnoreCase("blackjack")) {
-        	new BlackJack(this);
+        	playerGame.put(this, new BlackJack(this));
         } else if (game.equalsIgnoreCase("poker")) {
-        	new Poker(this); 
+        	playerGame.put(this, new Poker(this)); 
         }
         
         playerList.put(player, this);
@@ -73,6 +75,11 @@ public class GamePlayer {
 		return false;
 	}
 	
+	public static Game getGame(GamePlayer player) {
+		return playerGame.get(player);
+		
+	}
+	
 	public static boolean checkIfPlaying(Player player) {
 		if (playersInGame.containsKey(player)) return true;
 		return false;
@@ -89,6 +96,14 @@ public class GamePlayer {
 	
 	public void message(String msg) {
 		player.sendMessage(ChatColor.translateAlternateColorCodes('&', msg));
+	}
+	
+	public void playerWin() {
+		
+	}
+	
+	public void playerLose() {
+		
 	}
     
 }

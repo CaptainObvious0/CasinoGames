@@ -62,7 +62,7 @@ public class Deck {
     }
     
     // BlackJack
-    public int getHandTotal(ArrayList<Integer> cards) {
+    public static int getHandTotal(ArrayList<Integer> cards) {
         int total = 0;
         for (int card : cards) {
             total += getGameValue(card);

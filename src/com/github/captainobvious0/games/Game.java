@@ -10,11 +10,6 @@ public class Game {
 	public Game(String game, GamePlayer player) {
 		this.game = game;
 		this.player = player;
-		startGame();
 	}
 	
-	public void startGame() {
-		
-	}
-
 }

@@ -7,6 +7,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
 import com.github.captainobvious0.cardutil.GamePlayer;
+import com.github.captainobvious0.games.BlackJack;
+import com.github.captainobvious0.games.Game;
 
 public class ChatListener implements Listener {
 	
@@ -19,14 +21,17 @@ public class ChatListener implements Listener {
 			String gameType = GamePlayer.getGameType(player);
 			GamePlayer gPlayer = GamePlayer.getGamePlayer(player);
 			String msg = event.getMessage();
+			Game pGame = GamePlayer.getGame(gPlayer);
 			event.setCancelled(true);
 			
 			if (gameType.equalsIgnoreCase("blackjack")) {
 				
+				BlackJack bJack = (BlackJack) pGame;
+				
 				if (msg.equalsIgnoreCase("hit")) {
-					
+					bJack.hit();
 				} else if (msg.equalsIgnoreCase("stand")) {
-					
+					bJack.stand();
 				} else if (msg.equalsIgnoreCase("stop")) {
 					GamePlayer.removePlayer(player);
 					player.sendMessage(addColor("&9Casino> &7You have left your game of &6BlackJack&7. Thanks for playing!"));
